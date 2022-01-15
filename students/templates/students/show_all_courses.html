@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Courses</title>
+</head>
+<body>
+   <h1>Here are all the courses listed below</h1>
+{% for crs in course%}
+   <p>
+       <div>Course Name:</div>
+       {{crs.course_name}}
+       <div>Course Type:</div>
+       {{crs.course_type}}
+       <div>Course Descrption:</div>
+       {{crs.course_description}}
+       <a  href="{% url 'create_course_request' %}">Join Now</a>
+       <button onclick="send_data()" type="button">Enrol</button>
+
+
+   </p>
+{% endfor %}
+<script>
+    function send_data(e){
+    e.preventDefault();
+    var data=new FormData();
+    data.append('course_name','maths');
+    console.log('Yes the button is clicked')
+    var xhr= new XMLHttpRequest();
+    xhr.open('POST',"{% url 'create_course_request'%}",true);
+    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+    xhr.send(data);
+
+    }
+</script>
+</body>
+</html>

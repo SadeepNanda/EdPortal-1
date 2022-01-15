@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Join Our Courses</title>
+</head>
+<body>
+    <h1 align="center">Join our courses by registering!</h1>
+    <form method="POST" action="/student_registration/">
+        {% csrf_token %}
+
+
+        {{form.as_p}}
+
+    <button type="submit">Register</button>
+    </form>
+    <a href="{% url 'slogin'%}">Log In</a>
+</body>
+</html>
