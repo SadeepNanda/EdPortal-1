@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+</head>
+<body>
+   <h1>Welcome Teacher</h1>
+   {{msg}}
+  <div align="center"> <a href="{% url 'tlogout' %}">Logout</a> </div>
+  <div align="center"> <a href="{% url 'coursecreate' %}">Create a New Course</a></div>
+  <div align="center"> <a href="{% url 'teachercourses' %}">Show My Courses</a></div>
+
+</body>
+</html>

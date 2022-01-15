@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Course</title>
+</head>
+<body>
+<div>{{msg}}</div>
+<form method="POST" action="{% url 'coursecreate' %}" >
+    {% csrf_token%}
+    {{form.as_p}}
+    <button type="submit">Create Course</button>
+</form>
+
+</body>
+</html>

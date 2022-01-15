@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Courses</title>
+</head>
+<body>
+    <h1>Here are the courses that you have created</h1>
+{% for course in mycourses%}
+<h3>
+    {{course.course_name}}
+</h3>
+    <h5>
+    {{course.type}}
+</h5>
+    <h5>
+    {{course.course_description}}
+</h5>
+    <h3>
+    {{course.created_at}}
+</h3>
+
+{% endfor %}
+
+</body>
+</html>
