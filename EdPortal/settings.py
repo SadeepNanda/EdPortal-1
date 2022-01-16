@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'students',
     'teachers',
     'courses',
+    'chat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +72,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'EdPortal.wsgi.application'
+# WSGI_APPLICATION = 'EdPortal.wsgi.application'
+ASGI_APPLICATION = 'EdPortal.asgi.application'
 
 
 # Database
@@ -108,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
