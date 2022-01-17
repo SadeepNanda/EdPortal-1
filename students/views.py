@@ -59,8 +59,22 @@ def student_home(request):
         return redirect('slogin')
 
 def show_all_courses(request):
-    course=courses.objects.all()
-    return  render(request,'students\show_all_courses.html',{'course':course})
+    course = courses.objects.all()
+    course1 = [course for course in courses.objects.all()]
+    not_displayable_courses = [course.registered_course_id for course in student_teachers.objects.filter(
+        student_id=student.objects.get(student_id=request.session['sid']))]
+    # print(not_displayable_courses)
+    # print(type(course))
+    displayable_courses = []
+    for crs in course1:
+        if crs not in not_displayable_courses:
+            displayable_courses.append(crs)
+
+    # print(displayable_courses)
+    # displayable_courses=[course1 for course1 in course and not in not_displayable_courses  ]
+
+    # applicable_courses=[course for course in courses.objects.filter(course_id=)]
+    return render(request, 'students\show_all_courses.html', {'course': displayable_courses})
 
 
 def show_student_profile(request):
