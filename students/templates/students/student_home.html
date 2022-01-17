@@ -3,12 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+{% load static %}
+    <link rel ="stylesheet"  href ="{% static 'student_home.css' %}">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+  <title>Responsive SideBar Navigator | EdPortal</title>
 </head>
+
 <body>
-  <h1 align="center">Hello Welcome!</h1>
-  <h1 align="center">{{msg}}</h1>
-  <div align="center"> <a href="/student_logout/">Logout</a> </div>
-  <div align="center"> <a href="/show_courses/">Explore Courses</a> </div>
+
+  <div class="sidebar">
+    <div class="logo_content">
+      <div class="logo">
+        <i class='bx bx-cloud-rain'></i>
+        <div class="logo_name">EdPortal</div>
+      </div>
+      <i class='bx bx-menu' id="btn"></i>
+    </div>
+    <ul class="nav_list">
+      <li>
+        <a href="#">
+          <i class='bx bx-search-alt-2' ></i>
+          <input type="text" placeholder="Search...">
+        </a>
+        <span class="tooltip">Search</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-dashboard' ></i>
+          <span class="links_name">Home</span>
+        </a>
+        <span class="tooltip">Home</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-user' ></i>
+          <span class="links_name">User</span>
+        </a>
+        <span class="tooltip">User</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-message-detail' ></i>
+          <span class="links_name">Notifications</span>
+        </a>
+        <span class="tooltip">Notifications</span>
+      </li>
+      <li>
+        <a href="/show_courses/"">
+          <i class='bx bx-pie-chart-alt-2'></i>
+          <span class="links_name">Explore Courses</span>
+        </a>
+        <span class="tooltip">Explore Courses</span>
+      </li>
+      <li>
+        <a href="/student_logout/">
+          <i class='bx bx-folder' ></i>
+          <span class="links_name">Log Out</span>
+        </a>
+        <span class="tooltip">Log Out</span>
+      </li>
+     <!-- <li>
+        <a href="#">
+          <i class='bx bx-cart-alt' ></i>
+          <span class="links_name">Order</span>
+        </a>
+        <span class="tooltip">Order</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-save' ></i>
+          <span class="links_name">Save</span>
+        </a>
+        <span class="tooltip">Save</span>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">Settings</span>
+        </a>
+        <span class="tooltip">Settings</span>
+      </li>
+    </ul>
+    <div class="profile_content">
+      <div class="profile">
+        <div class="profile_details">
+          <img src="https://avatars.githubusercontent.com/u/16125100?v=4" alt="">
+          <div class="name_job">
+            <div class="name">Rainer Flores</div>
+            <div class="job">Software Engineer</div>
+          </div>
+        </div>
+        <i class='bx bx-log-out' id="log_out"></i>
+      </div>
+    </div>
+    <div class="home_content">
+      <div class="text">Home Content</div>
+    </div>
+  </div>  -->
+
+</body>
+</html>
+
+
+
+
+
+
 
 </body>
 </html>
