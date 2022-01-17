@@ -12,7 +12,8 @@ urlpatterns = [
     path('student_logout/',views.student_logout, name='slogout'),
     path('show_courses/',views.show_all_courses, name='show_all_courses'),
     path('course_request/',courses_views.create_course_request,name='create_course_request'),
-
+    path('show_student_profile/', views.show_student_profile, name='show_student_profile'),
+    path('show_my_courses/', views.show_my_courses, name='mycourses'),
 
 
 
