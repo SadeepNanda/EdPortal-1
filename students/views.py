@@ -63,6 +63,31 @@ def show_all_courses(request):
     return  render(request,'students\show_all_courses.html',{'course':course})
 
 
+def show_student_profile(request):
+    if request.session.has_key('sid') or request.session.has_key('tid') :
+        student_info=student.objects.get(student_id=int(request.POST['student_id']))
+
+        print(request.POST)
+
+        return render(request,'students\show_student_profile.html',{'student_info':student_info})
+    else:
+        return  redirect('Landing')
+
+
+def show_my_courses(request):
+    if request.session.has_key('sid')  :
+        my_courses=[course for course in student_teachers.objects.filter(student_id=student.objects.get(student_id=request.session['sid']))]
+        print(my_courses)
+
+        print(request.POST)
+
+        return render(request,'students\show_my_courses.html',{'my_courses':my_courses})
+    else:
+        return  redirect('slogin')
+
+
+
+
 
 
 

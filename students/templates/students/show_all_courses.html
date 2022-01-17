@@ -14,17 +14,32 @@
        {{crs.course_type}}
        <div>Course Descrption:</div>
        {{crs.course_description}}
-       <a  href="{% url 'create_course_request' %}">Join Now</a>
-       <button onclick="send_data()" type="button">Enrol</button>
+       <form method="POST" action="{% url 'show_teacher_profile' %}">
+           {% csrf_token %}
+           <input type="hidden" name="teacher_id" value={{crs.course_instructor_id.teacher_id}}>
+           <button  type="submit">See {{crs.course_instructor_id.name}}'s profile </button>
+       </form>
+       <!--<a  href="{% url 'show_teacher_profile' %}">See {{crs.course_instructor_id.name}}'s profile</a>-->
+
+       <form method="POST" action="{% url 'create_course_request' %}">
+           {% csrf_token %}
+           <input type="hidden" name="course_id" value={{crs.course_id}}>
+           <button  type="submit">Enroll</button>
+       </form>
 
 
    </p>
 {% endfor %}
 <script>
     function send_data(e){
-    e.preventDefault();
     var data=new FormData();
-    data.append('course_name','maths');
+    course_name='maths';
+    /*var data={
+     'course_name':course_name,
+     'student_id':1
+    };*/
+    data.append('course_name',course_name);
+    //var data = JSON.stringify({"course_name":course_name,"name":"LaraCroft"});
     console.log('Yes the button is clicked')
     var xhr= new XMLHttpRequest();
     xhr.open('POST',"{% url 'create_course_request'%}",true);
