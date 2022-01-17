@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Requests</title>
+</head>
+<body>
+  {% for course_request in course_requests%}
+     <p>
+         {{course_request.requested_student_id.name}}
+
+     </p>
+  <p>
+      {{course_request.requested_course_id.course_name}}
+  </p>
+  <p>
+      {{course_request.requested_course_id.course_type}}
+  </p>
+<form type="hidden" method="POST" action="{% url 'teacherrequests' %}">
+    {% csrf_token %}
+    <input type="hidden" name="request_id" value={{course_request.id}}>
+    <input type="hidden" name="msg" value="Approve">
+
+
+    <button  type="submit" >
+        Approve
+    </button>
+ </form>
+  <br>
+  <form type="hidden" method="POST" action="{% url 'show_student_profile' %}">
+      {% csrf_token %}
+    <button name="student_id" value={{course_request.requested_student_id.student_id}}>
+         View Student Profile
+    </button>
+  </form>
+  <br>
+  <form type="hidden" method="POST">
+    <button>
+        Reject
+    </button>
+</form>
+{% endfor%}
+
+</body>
+</html>

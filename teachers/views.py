@@ -2,7 +2,10 @@ from django.shortcuts import render,redirect
 from .forms import *
 from.models import *
 from django.views.decorators.cache import cache_control
-from courses.models import courses
+from courses.models import *
+from students.models import *
+from django.http import HttpResponse
+
 #teachers
 def teacher_registration(request):
     if request.method=='POST':
@@ -77,7 +80,7 @@ def create_course(request):
     else:
         return redirect('tlogin')
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+
 def display_my_courses(request):
     if request.session.has_key('tid'):
         teacher_course_list=[course for course in courses.objects.filter(course_instructor_id=teachers.objects.get(teacher_id=request.session['tid']))]
@@ -87,4 +90,44 @@ def display_my_courses(request):
         return  render(request,'teachers/teacher_my_courses.html',{'mycourses':teacher_course_list})
     else:
         return redirect('tlogin')
+
+
+def display_my_requests(request):
+    if request.session.has_key('tid'):
+
+
+
+        #course_approval
+        if 'msg' in request.POST.keys() and request.POST['msg']=='Approve':
+            course_request=course_requests.objects.get(id=request.POST['request_id'])
+            course_request.approval_status='Approved'
+            course_request.save()
+            course_request.requested_course_id.course_class_strength+=1
+            course_request.requested_course_id.save()
+            s_teacher_register=student_teachers(registered_course_id=course_request.requested_course_id,course_instructor_id=course_request.course_instructor_id,student_id=course_request.requested_student_id)
+            s_teacher_register.save()
+
+        teacher_course_request_list = [course_request for course_request in course_requests.objects.filter(
+            course_instructor_id=teachers.objects.get(teacher_id=request.session['tid'])).filter(
+            approval_status='Pending')]
+        print(teacher_course_request_list)
+
+
+        return  render(request,'teachers/course_requests.html',{'course_requests':teacher_course_request_list})
+    else:
+        return redirect('tlogin')
+
+def show_teacher_profile(request):
+    if request.session.has_key('sid') or request.session.has_key('tid') :
+        teacher_info=teachers.objects.get(teacher_id=int(request.POST['teacher_id']))
+
+        print(request.POST)
+
+        return render(request,'teachers\show_teacher_profile.html',{'teacher_info':teacher_info})
+    else:
+        return  redirect('Landing')
+
+
+
+
 
