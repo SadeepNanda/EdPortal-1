@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'students',
     'teachers',
     'courses',
+    'chat',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -70,7 +72,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'EdPortal.wsgi.application'
+# WSGI_APPLICATION = 'EdPortal.wsgi.application'
+ASGI_APPLICATION = 'EdPortal.asgi.application'
 
 
 # Database
@@ -108,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -124,3 +127,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    }
+}
