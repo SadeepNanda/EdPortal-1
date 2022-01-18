@@ -5,6 +5,14 @@
     <title>All Courses</title>
 </head>
 <body>
+<form method="POST" action="{% url 'show_all_courses' %}">
+    {% csrf_token %}
+    <input name="course_name" placeholder="Search by Course Name">
+    <input name="course_type" placeholder="Search By Course Type">
+    <input name="course_instructor" placeholder="Search by Course Instructor">
+    <input type="hidden" name="msg" value="Search">
+    <button type="submit">Search</button>
+</form>
    <h1>Here are all the courses listed below</h1>
 {% for crs in course%}
    <p>
