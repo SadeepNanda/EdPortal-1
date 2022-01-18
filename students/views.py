@@ -74,13 +74,15 @@ def show_all_courses(request):
     # displayable_courses=[course1 for course1 in course and not in not_displayable_courses  ]
 
     requested_courses_list= [course.requested_course_id for course in course_requests.objects.filter(
-        requested_student_id=student.objects.get(student_id=request.session['sid'])).filter(approval_status='Pending').filter(approval_status='Approved')]
+        requested_student_id=student.objects.get(student_id=request.session['sid'])).filter(approval_status='Pending')]
+
+    print(requested_courses_list)
 
     final_displayable_course=[]
     for crs in displayable_courses:
         if crs not in requested_courses_list:
             final_displayable_course.append(crs)
-    print(final_displayable_course)
+    #print(final_displayable_course)
     #print(final_displayable_course[1].course_name)
 
     if 'msg' not in request.POST:

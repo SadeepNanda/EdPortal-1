@@ -15,7 +15,7 @@
 </form>
    <h1>Here are all the courses listed below</h1>
 {% for crs in course%}
-   <p>
+   <p  id="Course_List">
        <div>Course Name:</div>
        {{crs.course_name}}
        <div>Course Type:</div>
@@ -32,29 +32,15 @@
        <form method="POST" action="{% url 'create_course_request' %}">
            {% csrf_token %}
            <input type="hidden" name="course_id" value={{crs.course_id}}>
-           <button  type="submit">Enroll</button>
+           <button onclick= type="submit">Enroll</button>
        </form>
 
 
    </p>
 {% endfor %}
 <script>
-    function send_data(e){
-    var data=new FormData();
-    course_name='maths';
-    /*var data={
-     'course_name':course_name,
-     'student_id':1
-    };*/
-    data.append('course_name',course_name);
-    //var data = JSON.stringify({"course_name":course_name,"name":"LaraCroft"});
-    console.log('Yes the button is clicked')
-    var xhr= new XMLHttpRequest();
-    xhr.open('POST',"{% url 'create_course_request'%}",true);
-    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
-    xhr.send(data);
-
+    function change_type(e){
+     console.log(document.getElementById("Course_List"))
     }
 </script>
 </body>
