@@ -1,3 +1,4 @@
+
 from django.db import models
 from teachers.models import teachers
 from students.models import student
@@ -13,8 +14,7 @@ class courses(models.Model):
     course_class_strength=models.IntegerField(default=0,validators=[MinValueValidator(0), MaxValueValidator(300)])
 
 class course_requests(models.Model):
-
-    requested_course_id=models.ForeignKey(courses,on_delete=models.CASCADE)
+    requested_course_id=models.ForeignKey('courses',on_delete=models.CASCADE)
     course_instructor_id=models.ForeignKey(teachers,on_delete=models.CASCADE)
     requested_student_id=models.ForeignKey(student,on_delete=models.CASCADE)
     approval_status=models.CharField(max_length=50)
@@ -23,4 +23,3 @@ class student_teachers(models.Model):
     registered_course_id = models.ForeignKey(courses, on_delete=models.CASCADE)
     course_instructor_id = models.ForeignKey(teachers, on_delete=models.CASCADE)
     student_id = models.ForeignKey(student, on_delete=models.CASCADE)
-
