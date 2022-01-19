@@ -107,9 +107,13 @@ def show_all_courses(request):
 
 def show_student_profile(request):
     if request.session.has_key('sid') or request.session.has_key('tid') :
-        student_info=student.objects.get(student_id=int(request.POST['student_id']))
+        try:
+            student_info=student.objects.get(student_id=int(request.POST['student_id']))
 
-        print(request.POST)
+            #print(request.POST)
+
+        except:
+            student_info = student.objects.get(student_id=int(request.session['sid']))
 
         return render(request,'students\show_student_profile.html',{'student_info':student_info})
     else:
