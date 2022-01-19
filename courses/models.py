@@ -1,3 +1,4 @@
+
 from django.db import models
 from teachers.models import teachers
 from students.models import student

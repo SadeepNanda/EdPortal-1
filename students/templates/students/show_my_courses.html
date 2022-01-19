@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,7 +10,7 @@
 <div>
     {% for course in my_courses%}
 
-  <!--  <p>
+   <p>
       {{course.registered_course_id.course_name}}
     </p>
     <p>
@@ -19,7 +19,7 @@
 
 <h1>Here are all the courses listed below</h1>
 {% for crs in course%}
--->
+
    <div class="container">
   <div class="card">
     <div class="card-header">
@@ -89,9 +89,29 @@
   </div>
 
 
--->
   {% endfor %}
 </div>
 
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Courses</title>
+</head>
+<body>
+<div>
+    {% for course in my_courses%}
+    <p>
+      {{course.registered_course_id.course_name}}
+    </p>
+    <p>
+        {{course.registered_course_id.course_instructor_id.name}}
+    </p>
+    {% endfor %}
+</div>
 </body>
 </html>

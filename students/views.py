@@ -59,8 +59,75 @@ def student_home(request):
         return redirect('slogin')
 
 def show_all_courses(request):
-    course=courses.objects.all()
-    return  render(request,'students\show_all_courses.html',{'course':course})
+    course = courses.objects.all()
+    course1 = [course for course in courses.objects.all()]
+    not_displayable_courses = [course.registered_course_id for course in student_teachers.objects.filter(
+        student_id=student.objects.get(student_id=request.session['sid']))]
+    # print(not_displayable_courses)
+    # print(type(course))
+    displayable_courses = []
+    for crs in course1:
+        if crs not in not_displayable_courses:
+            displayable_courses.append(crs)
+
+    # print(displayable_courses)
+    # displayable_courses=[course1 for course1 in course and not in not_displayable_courses  ]
+
+    requested_courses_list= [course.requested_course_id for course in course_requests.objects.filter(
+        requested_student_id=student.objects.get(student_id=request.session['sid'])).filter(approval_status='Pending')]
+
+    print(requested_courses_list)
+
+    final_displayable_course=[]
+    for crs in displayable_courses:
+        if crs not in requested_courses_list:
+            final_displayable_course.append(crs)
+    #print(final_displayable_course)
+    #print(final_displayable_course[1].course_name)
+
+    if 'msg' not in request.POST:
+        return render(request, 'students\show_all_courses.html', {'course': final_displayable_course})
+    else:
+        #print(final_displayable_course)
+        filtered_courses_list=[]
+        if request.POST['msg']=='Search':
+            for idx in range(len(final_displayable_course)):
+                crs=final_displayable_course[idx]
+                #print(crs,crs.course_name)
+                #print(crs.course_name,request.POST['course_name'])
+                #print(crs.course_name==request.POST['course_name'])
+                if crs.course_name==request.POST['course_name'] or crs.course_type==request.POST['course_type'] or crs.course_instructor_id.name==request.POST['course_instructor']:
+                    #print(final_displayable_course.index(crs))
+                    filtered_courses_list.append(crs)
+            return render(request, 'students\show_all_courses.html', {'course': filtered_courses_list})
+
+    # applicable_courses=[course for course in courses.objects.filter(course_id=)]
+    return render(request, 'students\show_all_courses.html', {'course': final_displayable_course})
+
+
+def show_student_profile(request):
+    if request.session.has_key('sid') or request.session.has_key('tid') :
+        student_info=student.objects.get(student_id=int(request.POST['student_id']))
+
+        print(request.POST)
+
+        return render(request,'students\show_student_profile.html',{'student_info':student_info})
+    else:
+        return  redirect('Landing')
+
+
+def show_my_courses(request):
+    if request.session.has_key('sid')  :
+        my_courses=[course for course in student_teachers.objects.filter(student_id=student.objects.get(student_id=request.session['sid']))]
+        print(my_courses)
+
+        print(request.POST)
+
+        return render(request,'students\show_my_courses.html',{'my_courses':my_courses})
+    else:
+        return  redirect('slogin')
+
+
 
 
 
