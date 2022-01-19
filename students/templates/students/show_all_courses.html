@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Courses</title>
+
+   {% load static %}
+    <link rel ="stylesheet"  href ="{% static 'css/show_all_courses.css' %}">
+</head>
+<body>
+<!--<form method="POST" action="{% url 'show_all_courses' %}">
+    {% csrf_token %}
+    <input name="course_name" placeholder="Search by Course Name">
+    <input name="course_type" placeholder="Search By Course Type">
+    <input name="course_instructor" placeholder="Search by Course Instructor">
+    <input type="hidden" name="msg" value="Search">
+    <button type="submit">Search</button>
+</form>
+   <h1>Here are all the courses listed below</h1>
+  {% for crs in course%}
+      <p  id="Course_List">
+    <!--   <div>Course Name:</div>
+       {{crs.course_name}}
+       <div>Course Type:</div>
+       {{crs.course_type}}
+       <div>Course Descrption:</div>
+       {{crs.course_description}}
+
+       <form method="POST" action="{% url 'show_teacher_profile' %}">
+           {% csrf_token %}
+           <input type="hidden" name="teacher_id" value={{crs.course_instructor_id.teacher_id}}>
+           <button  type="submit">See {{crs.course_instructor_id.name}}'s profile </button>
+       </form>
+      <a  href="{% url 'show_teacher_profile' %}">See {{crs.course_instructor_id.name}}'s profile</a>
+
+       <form method="POST" action="{% url 'create_course_request' %}">
+           {% csrf_token %}
+           <input type="hidden" name="course_id" value={{crs.course_id}}>
+           <button onclick= type="submit">Enroll</button>
+       </form>
+
+
+   </p>
+{% endfor %}
+<script>
+    function change_type(e){
+     console.log(document.getElementById("Course_List"))
+    }
+</script>
+
+
+ <h1>Here are all the courses listed below</h1>
+{% for crs in course%}
+-->
+ <p  id="Course_List">
+<div class = "top">
+    <form method="POST" action="{% url 'show_all_courses' %}">
+    {% csrf_token %}
+    <input name="course_name" placeholder="Search by Course Name">
+    <input name="course_type" placeholder="Search By Course Type">
+    <input name="course_instructor" placeholder="Search by Course Instructor">
+    <input type="hidden" name="msg" value="Search">
+    <button type="submit">Search</button>
+</form>
+</div>
+
+   <div class="container">
+  <div class="card">
+    <div class="card-header">
+      <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" />
+    </div>
+    <div class="card-body">
+
+      <span class="tag tag-teal">{{crs.course_name}}</span>
+      <span class="tag tag-teal"> {{crs.course_type}}</span>
+      <h4>
+
+      </h4>
+      <p>
+         {{crs.course_description}}
+      </p>
+      <div class="user">
+        <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo" alt="user" />
+        <div class="user-info">
+
+          <small>   <form method="POST" action="{% url 'show_teacher_profile' %}">
+           {% csrf_token %}
+           <input type="hidden" name="teacher_id" value={{crs.course_instructor_id.teacher_id}}>
+           <button  type="submit">See {{crs.course_instructor_id.name}}'s profile </button>
+       </form></small>
+            <small>   <form method="POST" action="{% url 'create_course_request' %}">
+           {% csrf_token %}
+           <input type="hidden" name="course_id" value={{crs.course_id}}>
+           <button onclick= type="submit">Enroll</button>
+       </form>
+</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <img src="https://www.newsbtc.com/wp-content/uploads/2020/06/mesut-kaya-LcCdl__-kO0-unsplash-scaled.jpg" alt="ballons" />
+    </div>
+    <div class="card-body">
+      <span class="tag tag-purple">Popular</span>
+      <h4>
+        How to Keep Going When You Don’t Know What’s Next
+      </h4>
+      <p>
+        The future can be scary, but there are ways to
+        deal with that fear.
+      </p>
+      <div class="user">
+        <img src="https://lh3.googleusercontent.com/ogw/ADGmqu8sn9zF15pW59JIYiLgx3PQ3EyZLFp5Zqao906l=s32-c-mo" alt="user" />
+        <div class="user-info">
+          <h5>Eyup Ucmaz</h5>
+          <small>Yesterday</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <img src="https://images6.alphacoders.com/312/thumb-1920-312773.jpg" alt="city" />
+    </div>
+    <div class="card-body">
+      <span class="tag tag-pink">Design</span>
+      <h4>
+        10 Rules of Dashboard Design
+      </h4>
+      <p>
+        Dashboard Design Guidelines
+      </p>
+      <div class="user">
+        <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
+        <div class="user-info">
+          <h5>Carrie Brewer</h5>
+          <small>1w ago</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <p>
+       <div>Course Name:</div>
+       {{crs.course_name}}
+       <div>Course Type:</div>
+       {{crs.course_type}}
+       <div>Course Descrption:</div>
+       {{crs.course_description}}
+       <a  href="{% url 'create_course_request' %}">Join Now</a>
+       <button onclick="send_data()" type="button">Enrol</button>
+-->
+{% endfor %}
+<script>
+    function change_type(e){
+     console.log(document.getElementById("Course_List"))
+    }
+</script>
+
+
+
+</p>
+
+
+</body>
+</html>
