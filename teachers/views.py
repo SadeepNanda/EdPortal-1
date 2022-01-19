@@ -119,9 +119,13 @@ def display_my_requests(request):
 
 def show_teacher_profile(request):
     if request.session.has_key('sid') or request.session.has_key('tid') :
-        teacher_info=teachers.objects.get(teacher_id=int(request.POST['teacher_id']))
+        try:
+            teacher_info=teachers.objects.get(teacher_id=int(request.POST['teacher_id']))
 
-        print(request.POST)
+            print(request.POST)
+        except:
+            teacher_info = teachers.objects.get(teacher_id=int(request.session['tid']))
+
 
         return render(request,'teachers\show_teacher_profile.html',{'teacher_info':teacher_info})
     else:
