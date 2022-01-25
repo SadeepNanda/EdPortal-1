@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+</head>
+<body>
+<h1>Here we can see the course details</h1>
+<h3>{{crs.course_name}}</h3>
+<h3>{{crs.course_type}}</h3>
+<h3>{{crs.course_description}}</h3>
+<h3>{{crs.created_at}}</h3>
+<form method="POST" action="{% url 'show_teacher_profile' %}">
+           {% csrf_token %}
+           <input type="hidden" name="teacher_id" value={{crs.course_instructor_id.teacher_id}}>
+           <button  type="submit">See {{crs.course_instructor_id.name}}'s profile </button>
+       </form>
+</body>
+</html>
