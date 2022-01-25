@@ -14,6 +14,8 @@ urlpatterns = [
     path('course_request/',courses_views.create_course_request,name='create_course_request'),
     path('show_student_profile/',views.show_student_profile, name='show_student_profile'),
     path('show_my_courses/',views.show_my_courses,name='mycourses'),
+    path('show_requested_courses/',views.show_requested_courses,name='requestedcourses'),
+    path('show_notifications/',views.show_notifications,name='show_notifications'),
 
 
 

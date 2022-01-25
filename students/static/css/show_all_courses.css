@@ -2,7 +2,18 @@
 * {
   box-sizing: border-box;
 }
-body {
+
+.nav{
+position: fixed;
+}
+
+.heading{
+  position:fixed;
+  margin-top: 20px;
+}
+
+.cards {
+  float:left
   display: flex;
   justify-content: center;
   align-items: center;

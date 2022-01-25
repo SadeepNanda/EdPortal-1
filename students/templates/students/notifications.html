@@ -1,25 +1,24 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Requested Courses</title>
+    <title>Teacher Profile</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/student_home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/show_my_courses.css' %}">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+   
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
 </head>
 
 <body>
-
     <div class="nav">
         <div class="sidebar">
             <div class="logo_content">
@@ -45,19 +44,20 @@
                     <span class="tooltip">Home</span>
                 </li>
                 <li>
-                    <a href="/show_student_profile/">
+                    <a href="{% url 'show_student_profile' %}">
                         <i class='bx bx-user'></i>
                         <span class="links_name">Profile</span>
                     </a>
                     <span class="tooltip">Profile</span>
                 </li>
                 <li>
-                    <a href="/show_notifications/">
+                    <a href="{% url 'show_notifications' %}">
                         <i class='bx bx-message-detail'></i>
                         <span class="links_name">Notifications</span>
                     </a>
                     <span class="tooltip">Notifications</span>
                 </li>
+
                 <li>
                     <a href="/show_courses/">
                         <i class='bx bx-pie-chart-alt-2'></i>
@@ -68,9 +68,9 @@
                 <li>
                     <a href="/show_my_courses/">
                         <i class='bx bx-pie-chart-alt-2'></i>
-                        <span class="links_name">Enrolled Courses</span>
+                        <span class="links_name">My Courses</span>
                     </a>
-                    <span class="tooltip">Enrolled Courses</span>
+                    <span class="tooltip">My Courses</span>
                 </li>
                 <li>
                     <a href="/show_requested_courses/">
@@ -86,55 +86,22 @@
                     </a>
                     <span class="tooltip">Log Out</span>
                 </li>
-
+            </ul>
         </div>
     </div>
 
 
-    <div class="top" style="margin-left:320px">
-        <button type="button" class="btn btn-primary">Here are all the courses requested.</button>
+    <div style="margin-left:320px">
+        <button type="button" class="btn btn-primary">These are the notifications</button>
     </div>
 
-    <div class="cards" style="margin-left:270px">
 
-        <div class="container">
-            <div class="row ">
-                {% for course in my_courses%}
-                <div class=" col-md-4 ">
-                    <div class="card m-5 p-2">
-                        <div class="card-header">
-                            <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg"
-                                alt="rover" />
-                        </div>
-                        <div class="card-body">
-
-                            <span class="tag tag-teal"> {{course.registered_course_id.course_name}}</span><br>
-                            <span class="tag tag-teal"> {{course.registered_course_id.course_instructor_id.name}}</span>
-
-                            <div class="user">
-                                <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
-                                    alt="user" />
-                                <div class="user-info">
-                                    <form type="hidden" method="POST" action="{% url 'course_details' %}">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="course_id"
-                                            value={{course.registered_course_id.course_id}}>
-                                        <button type="submit">See course details</button>
-                                    </form>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-
-        </div>
+    <div class="noti" style="margin-left:320px">
+        {% for ntf in ntfs%}
+        <h5>{{ntf.msg}}</h5>
+        <h8>{{ntf.created_at}}</h8>
+        {% endfor %}
     </div>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -149,39 +116,3 @@
 </body>
 
 </html>
-
-
-<!--
-  {% for rqt in requests%}
-  <h3>
-      {{rqt.requested_course_id.course_name}}
-  </h3>
-  <p>
-      {{rqt.requested_course_id.course_type}}
-  </p>
-  <p>
-      {{rqt.requested_course_id.course_description}}
-  </p>
-  <form method="POST" action="{% url 'show_teacher_profile' %}">
-           {% csrf_token %}
-           <input type="hidden" name="teacher_id" value={{rqt.requested_course_id.course_instructor_id.teacher_id}}>
-           <button  type="submit">See {{rqt.requested_course_id.course_instructor_id.name}}'s profile </button>
-       </form>
-
-  <form method="POST" action="{% url 'course_details' %}">
-           {% csrf_token %}
-           <input type="hidden" name="course_id" value={{rqt.requested_course_id.course_id}}>
-           <button  type="submit">See course details</button>
-       </form>
-  <form method="POST" action="{% url 'delete_request' %}">
-           {% csrf_token %}
-           <input type="hidden" name="access_type" value="student">
-           <input type="hidden" name="request_id" value={{rqt.id}}>
-           <button  type="submit">Delete Request</button>
-       </form>
-
-
-{% endfor %}
-</body>
-</html>
--->

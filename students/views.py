@@ -24,6 +24,7 @@ def student_login(request):
     if request.method=='POST':
         print(request.POST)
         form=student_login_form(request.POST)
+        print(form)
         if form.is_valid():
             username=request.POST['username']
             s=student.objects.get(username=username)
@@ -43,6 +44,7 @@ def student_login(request):
 
     else:
         form=student_login_form()
+        #print(form)
         return  render(request,'students/student_login.html',{'form':form})
 
 def student_logout(request):
@@ -122,7 +124,7 @@ def show_student_profile(request):
 
 def show_my_courses(request):
     if request.session.has_key('sid')  :
-        my_courses=[course for course in student_teachers.objects.filter(student_id=student.objects.get(student_id=request.session['sid']))]
+        my_courses=student_teachers.objects.filter(student_id=student.objects.get(student_id=request.session['sid']))
         print(my_courses)
 
         print(request.POST)
@@ -130,6 +132,33 @@ def show_my_courses(request):
         return render(request,'students\show_my_courses.html',{'my_courses':my_courses})
     else:
         return  redirect('slogin')
+
+def show_requested_courses(request):
+    if request.session.has_key('sid'):
+        requested_courses_list = [course.requested_course_id for course in course_requests.objects.filter(
+            requested_student_id=student.objects.get(student_id=request.session['sid'])).filter(
+            approval_status='Pending')]
+
+        requests_list= [course for course in course_requests.objects.filter(
+            requested_student_id=student.objects.get(student_id=request.session['sid'])).filter(
+            approval_status='Pending')]
+
+        #print(requested_courses_list)
+        #print(requested_courses_list.values("requested_course_id").course_name)
+        #print("These are the requested courses")
+        return  render(request,'students\show_requested_courses.html',{'courses':requested_courses_list,'requests':requests_list})
+    else:
+        return redirect('slogin')
+
+
+def show_notifications(request):
+    if request.session.has_key('sid'):
+        ntfs=notifications.objects.filter(s_id = student.objects.get(student_id=request.session['sid'])).order_by('-created_at')
+        #ntfs=notifications.objects.filter(s_id)
+        return render(request,'students/notifications.html',{'ntfs':ntfs})
+    else:
+        return redirect('slogin')
+
 
 
 

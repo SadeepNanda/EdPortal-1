@@ -16,6 +16,12 @@ class student(models.Model):
 	username=models.CharField(max_length=100,null=False,blank=False)
 	password=models.CharField(max_length=100,null=False,blank=False)
 
+class notifications(models.Model):
+	created_at = models.DateTimeField(auto_now_add=True)
+	msg= models.CharField(max_length=500)
+	s_id=models.ForeignKey(student,on_delete=models.CASCADE)
+
+
 
 #class Courses(models.Model):
 

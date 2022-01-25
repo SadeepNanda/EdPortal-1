@@ -1,13 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Requested Courses</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/student_home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/show_my_courses.css' %}">
+    <link rel="stylesheet" href="{% static 'css/show_requested_courses.css' %}">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,9 +66,9 @@
                 <li>
                     <a href="/show_my_courses/">
                         <i class='bx bx-pie-chart-alt-2'></i>
-                        <span class="links_name">Enrolled Courses</span>
+                        <span class="links_name">My Courses</span>
                     </a>
-                    <span class="tooltip">Enrolled Courses</span>
+                    <span class="tooltip">My Courses</span>
                 </li>
                 <li>
                     <a href="/show_requested_courses/">
@@ -89,7 +87,7 @@
 
         </div>
     </div>
-
+            
 
     <div class="top" style="margin-left:320px">
         <button type="button" class="btn btn-primary">Here are all the courses requested.</button>
@@ -99,7 +97,7 @@
 
         <div class="container">
             <div class="row ">
-                {% for course in my_courses%}
+                {% for rqt in requests%}
                 <div class=" col-md-4 ">
                     <div class="card m-5 p-2">
                         <div class="card-header">
@@ -107,23 +105,35 @@
                                 alt="rover" />
                         </div>
                         <div class="card-body">
-
-                            <span class="tag tag-teal"> {{course.registered_course_id.course_name}}</span><br>
-                            <span class="tag tag-teal"> {{course.registered_course_id.course_instructor_id.name}}</span>
-
+                            <span class="tag tag-teal"> {{rqt.requested_course_id.course_name}}</span><br>
+                            <span class="tag tag-teal"> {{rqt.requested_course_id.course_type}}</span>
+                            <h7>Course Description</h7>
+                            <p>
+                                {{rqt.requested_course_id.course_description}}
+                            </p>
                             <div class="user">
                                 <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
                                     alt="user" />
                                 <div class="user-info">
-                                    <form type="hidden" method="POST" action="{% url 'course_details' %}">
+                                    <form method="POST" action="{% url 'show_teacher_profile' %}">
                                         {% csrf_token %}
-                                        <input type="hidden" name="course_id"
-                                            value={{course.registered_course_id.course_id}}>
-                                        <button type="submit">See course details</button>
+                                        <input type="hidden" name="teacher_id" value={{rqt.requested_course_id.course_instructor_id.teacher_id}}>
+                                        <button  type="submit">See {{rqt.requested_course_id.course_instructor_id.name}}'s profile </button>
                                     </form>
-
-
-
+                             
+                               <form method="POST" action="{% url 'course_details' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="course_id" value={{rqt.requested_course_id.course_id}}>
+                                        <button  type="submit">See course details</button>
+                                    </form>
+                               <form method="POST" action="{% url 'delete_request' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="access_type" value="student">
+                                        <input type="hidden" name="request_id" value={{rqt.id}}>
+                                        <button  type="submit">Delete Request</button>
+                                    </form>
+                             
+                             
                                 </div>
                             </div>
                         </div>
@@ -147,7 +157,6 @@
         crossorigin="anonymous"></script>
 
 </body>
-
 </html>
 
 
