@@ -85,7 +85,7 @@ def display_my_courses(request):
     if request.session.has_key('tid'):
         teacher_course_list=[course for course in courses.objects.filter(course_instructor_id=teachers.objects.get(teacher_id=request.session['tid']))]
         print(teacher_course_list)
-        print(type(teacher_course_list[1]))
+
 
         return  render(request,'teachers/teacher_my_courses.html',{'mycourses':teacher_course_list})
     else:
@@ -106,6 +106,10 @@ def display_my_requests(request):
             course_request.requested_course_id.save()
             s_teacher_register=student_teachers(registered_course_id=course_request.requested_course_id,course_instructor_id=course_request.course_instructor_id,student_id=course_request.requested_student_id)
             s_teacher_register.save()
+            notification = notifications()
+            notification.msg = 'Accepted Request!\nYour requested for enrollment in course ' + course_request.requested_course_id.course_name + ' by: ' + course_request.course_instructor_id.name + 'has been accepted by the course instructor'
+            notification.s_id = student.objects.get(student_id=request.session['sid'])
+            notification.save()
 
         teacher_course_request_list = [course_request for course_request in course_requests.objects.filter(
             course_instructor_id=teachers.objects.get(teacher_id=request.session['tid'])).filter(

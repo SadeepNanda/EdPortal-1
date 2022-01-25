@@ -1,8 +1,15 @@
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 * {
   box-sizing: border-box;
 }
-body {
+
+.nav{
+position: fixed;
+}
+
+.cards {
+  float:left
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +33,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  width: 300px;
+  width: 320px;
 }
 .card-header img {
   width: 100%;
@@ -53,7 +60,7 @@ body {
   cursor: pointer;
 }
 .tag-teal {
-  background-color: #47bcd4;
+  background-color: #4755d4;
 }
 .tag-purple {
   background-color: #5e76bf;
@@ -68,7 +75,7 @@ body {
 }
 .user {
   display: flex;
-  margin-top: auto;
+  margin-top: 10px;
 }
 
 .user img {
