@@ -13,7 +13,7 @@ position: fixed;
 }
 
 .cards {
-  float:left
+  float:left;
   display: flex;
   justify-content: center;
   align-items: center;

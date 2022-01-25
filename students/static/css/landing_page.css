@@ -14,7 +14,7 @@ background-image: url('https://cdn.freecodecamp.org/testable-projects-fcc/images
 
 .bg-img{
 background-position:right bottom;
-background repeat: no-repeat;
+background-repeat: no-repeat;
 }
 
 section{
@@ -121,7 +121,7 @@ header .navigation a:hover{
 
 .media-icons a{
   position: relative;
-  color: #111;
+  color: #fff;
   font-size: 25px;
   transition: 0.3s;
   transition-property: transform;
