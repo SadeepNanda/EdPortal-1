@@ -34,7 +34,7 @@ background shadow: 0 4px 10px 0;
 
 .wrapper .left{
   width: 35%;
-  background: linear-gradient(to right,#01a9ac,#01dbdf);
+  background: linear-gradient(to right,#0151ac,#015187);
   padding: 30px 25px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
@@ -86,7 +86,7 @@ background shadow: 0 4px 10px 0;
 .wrapper .social_media ul li{
   width: 45px;
   height: 45px;
-  background: linear-gradient(to right,#01a9ac,#01dbdf);
+  background: linear-gradient(to right,#0151ac,#0151ac);
   margin-right: 10px;
   border-radius: 5px;
   text-align: center;

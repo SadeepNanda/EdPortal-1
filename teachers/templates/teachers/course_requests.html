@@ -49,13 +49,6 @@
                         </a>
                         <span class="tooltip">Profile</span>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class='bx bx-message-detail'></i>
-                            <span class="links_name">Notifications</span>
-                        </a>
-                        <span class="tooltip">Notifications</span>
-                    </li>
 
                     <li>
                         <a href="{% url 'teacherrequests' %}">
@@ -90,7 +83,7 @@
         </div>
 
 
-        <div style="margin-left:320px">
+        <div style="margin-left:320px; margin-top: 20px;">
             <button type="button" class="btn btn-primary">Here are the course requests from students</button>
         </div>
 
@@ -118,7 +111,7 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="request_id" value={{course_request.id}}>
                                             <input type="hidden" name="msg" value="Approve">
-                                            <button type="submit">Approve</button>
+                                            <button type="submit" class="btn btn-primary">Approve</button>
                                         </form>
                                     
                                         <form type="hidden" method="POST" action="{% url 'show_student_profile' %}">
@@ -133,7 +126,7 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="access_type" value="teacher">
                                             <input type="hidden" name="request_id" value={{course_request.id}}>
-                                            <button>
+                                            <button type="submit" class="btn btn-danger">
                                                 Reject
                                             </button>
                                         </form>
