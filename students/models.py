@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 
+from sqlalchemy import null
+
 
 class student(models.Model):
 	student_id=models.AutoField(primary_key=True)
@@ -15,6 +17,8 @@ class student(models.Model):
 	address= models.CharField(max_length=100,null=False,blank=False)
 	username=models.CharField(max_length=100,null=False,blank=False)
 	password=models.CharField(max_length=100,null=False,blank=False)
+	Class = models.CharField(max_length=20, null=True)
+	board = models.CharField(max_length=100, null=False, default="Central Board of Secondary Education")
 
 class notifications(models.Model):
 	created_at = models.DateTimeField(auto_now_add=True)

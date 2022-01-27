@@ -10,6 +10,8 @@ class student_creation_form(forms.ModelForm):
     address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}),required=True,max_length=30)
     username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}),required=True,max_length=30)
+    Class = forms.CharField(max_length=20, required=True)
+    board = forms.CharField(max_length=100, required=True)
     class Meta:
         model = student
         fields = (
@@ -20,6 +22,8 @@ class student_creation_form(forms.ModelForm):
             'address',
             'username',
             'password',
+            'Class',
+            'board',
         )
 
 class student_login_form(forms.Form):

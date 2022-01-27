@@ -10,6 +10,7 @@ def student_registration(request):
     if request.method=='POST':
         print(request.POST)
         form=student_creation_form(request.POST)
+        print(form.is_valid())
         if form.is_valid():
             student=form.save(commit="False")
             student.save()
@@ -25,6 +26,7 @@ def student_login(request):
         print(request.POST)
         form=student_login_form(request.POST)
         print(form)
+        print(form.is_valid())
         if form.is_valid():
             username=request.POST['username']
             s=student.objects.get(username=username)
