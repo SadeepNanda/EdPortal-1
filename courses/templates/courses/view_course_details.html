@@ -10,6 +10,7 @@
 <h3>{{crs.course_type}}</h3>
 <h3>{{crs.course_description}}</h3>
 <h3>{{crs.created_at}}</h3>
+<h3>{{crs.id_course_meet_link}}</h3>
 <form method="POST" action="{% url 'show_teacher_profile' %}">
            {% csrf_token %}
            <input type="hidden" name="teacher_id" value={{crs.course_instructor_id.teacher_id}}>

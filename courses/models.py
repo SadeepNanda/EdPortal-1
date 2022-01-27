@@ -12,6 +12,7 @@ class courses(models.Model):
     course_description= models.TextField(max_length=500,null=False)
     course_instructor_id=models.ForeignKey(teachers,on_delete=models.CASCADE)
     course_class_strength=models.IntegerField(default=0,validators=[MinValueValidator(0), MaxValueValidator(300)])
+    course_meet_link = models.CharField(max_length=150, null=True)
 
 class course_requests(models.Model):
     requested_course_id=models.ForeignKey('courses',on_delete=models.CASCADE)
