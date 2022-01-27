@@ -118,19 +118,19 @@
                                     <form method="POST" action="{% url 'show_teacher_profile' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="teacher_id" value={{rqt.requested_course_id.course_instructor_id.teacher_id}}>
-                                        <button  type="submit">See {{rqt.requested_course_id.course_instructor_id.name}}'s profile </button>
+                                        <button  type="submit" class="btn btn-info">See profile </button>
                                     </form>
                              
                                <form method="POST" action="{% url 'course_details' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="course_id" value={{rqt.requested_course_id.course_id}}>
-                                        <button  type="submit">See course details</button>
+                                        <button  type="submit" class="btn btn-link">See course details</button>
                                     </form>
                                <form method="POST" action="{% url 'delete_request' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="access_type" value="student">
                                         <input type="hidden" name="request_id" value={{rqt.id}}>
-                                        <button  type="submit">Delete Request</button>
+                                        <button  type="submit" class="btn btn-danger">Delete Request</button>
                                     </form>
                              
                              

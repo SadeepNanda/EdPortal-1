@@ -100,7 +100,7 @@
         <input name="course_type" placeholder="Search By Course Type">
         <input name="course_instructor" placeholder="Search by Course Instructor">
         <input type="hidden" name="msg" value="Search">
-        <button type="submit">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
     </form>
 </div>
 
@@ -130,20 +130,20 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="teacher_id"
                                             value={{crs.course_instructor_id.teacher_id}}>
-                                        <button type="submit">See {{crs.course_instructor_id.name}}'s profile </button>
+                                        <button type="submit" class="btn btn-link">See profile </button>
                                     </form>
                                     <!--<a  href="{% url 'show_teacher_profile' %}">See {{crs.course_instructor_id.name}}'s profile</a>-->
 
                                     <form method="POST" action="{% url 'create_course_request' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="course_id" value={{crs.course_id}}>
-                                        <button type="submit">Enroll</button>
+                                        <button type="submit" class="btn btn-primary">Enroll</button>
                                     </form>
 
                                     <form method="POST" action="{% url 'course_details' %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="course_id" value={{crs.course_id}}>
-                                        <button type="submit">See course details</button>
+                                        <button type="submit" class="btn btn-link">See course details</button>
                                     </form>
                                 </div>
                             </div>

@@ -111,14 +111,14 @@
                                             {% csrf_token %}
                                             <input type="hidden" name="request_id" value={{course_request.id}}>
                                             <input type="hidden" name="msg" value="Approve">
-                                            <button type="submit" class="btn btn-primary">Approve</button>
+                                            <button type="submit" class="btn btn-success">Approve</button>
                                         </form>
                                     
                                         <form type="hidden" method="POST" action="{% url 'show_student_profile' %}">
                                             {% csrf_token %}
                                             <span class="tag tag-teal"> {{course_request.requested_student_id.name}}</span>
                                             <button name="student_id"
-                                                value={{course_request.requested_student_id.student_id}}>View Student
+                                                value={{course_request.requested_student_id.student_id}} class="btn btn-link">View Student
                                                 Profile</button>
                                         </form>
                                         
