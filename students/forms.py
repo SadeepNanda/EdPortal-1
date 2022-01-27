@@ -3,15 +3,15 @@ from .models import student
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 class student_creation_form(forms.ModelForm):
-    name = forms.CharField(max_length=100)
-    email = forms.CharField(max_length=100)
+    # name = forms.CharField(max_length=100)
+    # email = forms.CharField(max_length=100)
     contact_no = forms.IntegerField(validators=[MinValueValidator(1000000000), MaxValueValidator(9999999999)])
     dept = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}),required=True,max_length=30)
     address = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}),required=True,max_length=30)
-    username = forms.CharField(max_length=100)
+    # username = forms.CharField(max_length=100)
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}),required=True,max_length=30)
-    Class = forms.CharField(max_length=20, required=True)
-    board = forms.CharField(max_length=100, required=True)
+    # Class = forms.CharField(max_length=20, required=True)
+    # board = forms.CharField(max_length=100, required=True)
     class Meta:
         model = student
         fields = (

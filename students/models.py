@@ -3,8 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 
-from sqlalchemy import null
-
 
 class student(models.Model):
 	student_id=models.AutoField(primary_key=True)
