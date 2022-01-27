@@ -10,7 +10,7 @@ from django.http import HttpResponse
 def teacher_registration(request):
     if request.method=='POST':
         print(request.POST)
-        form = teacher_creation_form(request.POST)
+        form = teacher_creation_form(request.POST, request.FILES)
         if form.is_valid():
             teacher = form.save(commit="False")
             teacher.save()
@@ -63,6 +63,7 @@ def create_course(request):
         if request.method=='POST':
             print(request.POST)
             form = course_creation_form(request.POST)
+            print(form.is_valid())
             if form.is_valid():
                 print(form)
                 #print(course)
@@ -108,7 +109,7 @@ def display_my_requests(request):
             s_teacher_register.save()
             notification = notifications()
             notification.msg = 'Accepted Request!\nYour requested for enrollment in course ' + course_request.requested_course_id.course_name + ' by: ' + course_request.course_instructor_id.name + 'has been accepted by the course instructor'
-            notification.s_id = student.objects.get(student_id=request.session['sid'])
+            notification.s_id = student.objects.get(student_id=course_request.requested_student_id.student_id)
             notification.save()
 
         teacher_course_request_list = [course_request for course_request in course_requests.objects.filter(

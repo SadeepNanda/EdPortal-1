@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 from django.core.validators import RegexValidator
+from sqlalchemy import null
 from students.models import *
 
 class teachers(models.Model):
@@ -16,6 +17,11 @@ class teachers(models.Model):
     ratings = models.DecimalField(default=0.0,decimal_places=2,validators=[MaxValueValidator(5.0),MinValueValidator(0.1)],max_digits=3,blank=True)
     username=models.CharField(max_length=100,null=False,blank=False)
     password = models.CharField(max_length=100, null=False, blank=False)
+    class_specialisation = models.CharField(max_length=20, null=True)
+    occupation = models.CharField(max_length=50, null=True)
+    experience = models.IntegerField(null=False, default=0)
+    subject = models.CharField(max_length=100, null=False, default="None")
+
 
 #class course_requests(models.Model):
 #    requested_course_id=models.ForeignKey(student,on_delete=models.CASCADE)

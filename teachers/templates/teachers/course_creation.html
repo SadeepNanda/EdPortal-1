@@ -106,7 +106,8 @@
 
                                         <form method="POST" action="{% url 'coursecreate' %}">
                                             {% csrf_token%}
-                                            <label for="id_course_name" class="form-label">Course Name</label>
+                                            {{form.as_p}}
+<!--                                           <label for="id_course_name" class="form-label">Course Name</label>
                                             <input typr="text" name="course_name" class="form-control"
                                                    placeholder="" required id="id_course_name"
                                                 required><br>
@@ -118,6 +119,11 @@
                                                     <input type="text" name="course_description" class="form-control"
                                                            placeholder="" required id="id_course_description"
                                                         required><br>
+                                                        <label for="id_course_meet_link" class="form-label">Course Meet Link</label>
+                                                        <input type="text" name="id_course_meet_link" class="form-control"
+                                                               placeholder="" required id="id_course_meet_link"
+                                                            required><br>
+                                        -->
                                                         
                                                         <div class="offset-2 col-lg-4">
                                             <button type="submit" class="btn1">Create Course</button>
