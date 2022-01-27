@@ -4,16 +4,22 @@ from.models import *
 from django.views.decorators.cache import cache_control
 from courses.models import *
 from students.models import *
+from chat.models import *
 from django.http import HttpResponse
 
 #teachers
 def teacher_registration(request):
     if request.method=='POST':
         print(request.POST)
-        form = teacher_creation_form(request.POST, request.FILES)
+        form = teacher_creation_form(request.POST)
         if form.is_valid():
             teacher = form.save(commit="False")
             teacher.save()
+            chat_user = ChatUsers()
+            chat_user.username = teacher.username
+            chat_user.is_teacher = True
+            chat_user.teacher_profile = teacher
+            chat_user.save()
         return redirect('tlogin')
 
     else:
@@ -63,7 +69,6 @@ def create_course(request):
         if request.method=='POST':
             print(request.POST)
             form = course_creation_form(request.POST)
-            print(form.is_valid())
             if form.is_valid():
                 print(form)
                 #print(course)

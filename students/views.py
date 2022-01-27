@@ -3,6 +3,7 @@ from . forms import *
 from .models import *
 from django.views.decorators.cache import cache_control
 from courses.models import *
+from chat.models import *
 
 def landing(request):
     return render(request,'students/landing_page.html',{})
@@ -10,10 +11,15 @@ def student_registration(request):
     if request.method=='POST':
         print(request.POST)
         form=student_creation_form(request.POST)
-        print(form.is_valid())
         if form.is_valid():
             student=form.save(commit="False")
             student.save()
+            chat_user=ChatUsers()
+            chat_user.username=student.username
+            chat_user.is_student=True
+            chat_user.student_profile=student
+            chat_user.save()
+
 
         return redirect('slogin')
     else:
@@ -26,7 +32,6 @@ def student_login(request):
         print(request.POST)
         form=student_login_form(request.POST)
         print(form)
-        print(form.is_valid())
         if form.is_valid():
             username=request.POST['username']
             s=student.objects.get(username=username)
@@ -104,6 +109,11 @@ def show_all_courses(request):
                     #print(final_displayable_course.index(crs))
                     filtered_courses_list.append(crs)
             return render(request, 'students\show_all_courses.html', {'course': filtered_courses_list})
+
+    student_id=0
+
+    if request.session.has_key('sid'):
+        student_id=request.session['sid']
 
     # applicable_courses=[course for course in courses.objects.filter(course_id=)]
     return render(request, 'students\show_all_courses.html', {'course': final_displayable_course})
