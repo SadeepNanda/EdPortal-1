@@ -90,10 +90,10 @@
         </div>
     </div>
 
-    <div class="heading" style= "margin-left:320px " >
+    <div class="heading" style= "margin-left:320px; margin-top: 40px; " >
         <button type="button" class="btn btn-primary">Here are all the courses listed below</button>
     </div>
-  <div class="search">
+  <div class="search" style="margin-left: 320px;">
     <form method="POST" action="{% url 'show_all_courses' %}">
         {% csrf_token %}
         <input name="course_name" placeholder="Search by Course Name">

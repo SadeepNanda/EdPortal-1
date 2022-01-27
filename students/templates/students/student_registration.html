@@ -27,7 +27,7 @@
             <div class="col"><img src="http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg"
                     class="rounded imglogin " alt=""></div>
             <div class="col ">
-                <form method="POST" action="/student_registration/">
+                <form method="POST" action="{% url 'sregistration' %}">
                     {% csrf_token %}
                     {{ form.as_p}}
 <!--                   <label for="id_name" class="form-label"></label>
