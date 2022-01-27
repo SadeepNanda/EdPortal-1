@@ -160,12 +160,13 @@
         <form method="POST" action="{% url 'tlogin' %}">
             {% csrf_token %}
             <h3>Login Here</h3>
-            <label for="id_username" class="form-label">Username:</label>
+            {{form.as_p}}
+<!--            <label for="id_username" class="form-label">Username:</label>
             <input type="text" name="username" class="form-control" maxlength="100" required id="id_username" placeholder="Username">
 
             <label for="id_password" class="form-label">Password:</label>
             <input type="password" name="password" class="form-control" placeholder="Password" maxlength="30" required
-                id="id_password" required>
+                id="id_password" required>-->
 
             <button type="submit">Log In</button>
       
