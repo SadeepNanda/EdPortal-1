@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+  <link rel="stylesheet" href="{% static 'css/course_details.css' %}">
+</head>
+<body>
+<div>
+<h1>Here we can see the course details</h1>
+<h3>{{crs.course_name}}</h3>
+<h3>{{crs.course_type}}</h3>
+<h3>{{crs.course_description}}</h3>
+<h3>{{crs.created_at}}</h3>
+
+<br>
+<br>
+<br>
+
+
+<div class="tabs">
+  <div class="tab-header">
+    <div class="active">
+      <i class="fa fa-code"></i> Notes
+    </div>
+    <div>
+      <i class="fa fa-pencil-square-o"></i> Resourses
+    </div>
+    <div>
+      <i class="fa fa-bar-chart"></i> Announcements
+    </div>
+    <div>
+      <i class="fa fa-envelope-o"></i> Students
+    </div>
+  </div>
+  <div class="tab-indicator"></div>
+  <div class="tab-body">
+    <div class="active">
+      <h2>Note down important stuff!</h2>
+
+    </div>
+    <div>
+      <h2>Upload pdfs docs images for students</h2>
+      <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="course" value="{{crs.course_id}}">
+        <input type="file" required name="resource_file">
+        <button type="submit" >Upload Files</button>
+
+      </form>
+    </div>
+    <div>
+      <h2>This is services section</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi minus exercitationem vero, id autem fugit assumenda a molestiae numquam at, quisquam cumque. Labore eligendi perspiciatis quia incidunt quaerat ut ducimus?</p>
+    </div>
+    <div>
+      <h2>This is contact section</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi minus exercitationem vero, id autem fugit t, quisquam cumque. Labore eligendi perspiciatis quia incidunt quaerat ut ducimus?</p>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'js/course_details.js' %}"></script>
+</body>
+</html>
