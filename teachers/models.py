@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 from django.core.validators import RegexValidator
-from sqlalchemy import null
 from students.models import *
 
 class teachers(models.Model):
