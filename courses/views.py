@@ -28,11 +28,56 @@ def create_course_request(request):
     return redirect('show_all_courses')
 
 def show_course_details(request):
-    print(request.POST)
-    course_details=courses.objects.get(course_id=request.POST['course_id'])
+    if request.session.has_key('sid'):
+        print(request.POST)
+        course_details=None
+        student_details=student.objects.get(student_id=request.session['sid'])
+        try:
+            course_details=courses.objects.get(course_id=request.POST['course_id'])
+            nts=notes.objects.filter(course_id=course_details).filter(s_id=student_details).order_by('-created_at')
+
+        except:
+            print(request.POST['course'])
+            #note=notes(note=request.POST['note'],s_id=student_details,course_id=request.POST['course'])
+            #note.save()
+            course_details=courses.objects.get(course_id=request.POST['course'])
+            note = notes(note=request.POST['note'], s_id=student_details, course_id=course_details)
+            note.save()
+            nts = notes.objects.filter(course_id=course_details).filter(s_id=student_details).order_by('-created_at')
+            print(note)
 
 
-    return render(request,'courses/view_course_details.html',{'crs':course_details})
+
+
+        return render(request,'courses/view_course_details.html',{'crs':course_details,'nts':nts})
+    else:
+        redirect('slogin')
+    #return render(request, 'courses/courses.html', {'crs': course_details})
+
+
+def modify_course_details(request):
+    if request.session.has_key('tid'):
+        try:
+            print(request.POST)
+            course_details = courses.objects.get(course_id=request.POST['course_id'])
+            resource=resources.objects.filter(course_id=course_details)
+            print(resource)
+
+            return render(request, 'courses/courses.html', {'crs':course_details})
+        except:
+            print(request.POST)
+            print(request.FILES)
+
+            course_details = courses.objects.get(course_id=request.POST['course'])
+            resource = resources(course_id=course_details,resource=request.FILES['resource_file'],description='new notes')
+            resource.save()
+
+            return render(request, 'courses/courses.html', {'crs':course_details})
+    else:
+        redirect('tlogin')
+    # return render(request, 'courses/courses.html', {'crs': course_details})
+
+
 
 
 def delete_request(request):

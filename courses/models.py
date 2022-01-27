@@ -24,3 +24,15 @@ class student_teachers(models.Model):
     registered_course_id = models.ForeignKey(courses, on_delete=models.CASCADE)
     course_instructor_id = models.ForeignKey(teachers, on_delete=models.CASCADE)
     student_id = models.ForeignKey(student, on_delete=models.CASCADE)
+
+class notes(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    note = models.CharField(max_length=500)
+    s_id = models.ForeignKey(student, on_delete=models.CASCADE)
+    course_id=models.ForeignKey(courses, on_delete=models.CASCADE)
+
+class resources(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    course_id = models.ForeignKey(courses, on_delete=models.CASCADE)
+    resource = models.FileField(null=True)
+    description=models.CharField(max_length=200,null=True)
